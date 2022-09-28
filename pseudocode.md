@@ -5,7 +5,7 @@ Main Screen:  INDEX
     onclick get the API data and populates to page 2(AKA Search Results)
 
 
-Search Results Page: MOVIE.HTML
+Search Results Page: results.HTML
     Title button to go back to Main Screen
     Show cards to display poster and title 
         USE FOR LOOP
@@ -18,7 +18,7 @@ Search Results Page: MOVIE.HTML
             else return modal:  "Your watch list is full!"
     Watch List Button: on click go to watchlist.html and get watchlist from localStorage
 
-Results Page: results.HTML
+Results Page: MOVIE.HTML
     Title button to go back to Main Screen
     Watch List Button: on click go to watchlist.html and get watchlist from localStorage
     Use API for reviews and movie data to load onto the page
