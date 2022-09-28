@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
     <script src="https://kit.fontawesome.com/a4998862a7.js" crossorigin="anonymous"></script>"
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -12,32 +13,70 @@
     <title>Results screen</title>
 </head>
 
-    <div class="topnav">
-        <a class="active" href="#home">Find My Movie</a>
-        <input type="text" ><i class="fa-sharp fa-solid fa-magnifying-glass"></i>
-    </div>
-
-    
-
-    <div class="img-container">
-        <img src="./assets/Images/ShrekPlaceholder.jpeg" alt="Original Shrek"/>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-    <script src="./assets/script/script.js"></script>
+<body>
+    <header>
+        <nav class="container navbar navbar-light bg-light justify-content-between">
+            <a class="navbar-brand">Navbar</a>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </nav>
+    </header>
+    <main class="container">
+        <section class="row">
+            <img src="assets/bee.png" class="card col-2">
+            <div class="row col">
+                <div class="card col-4">
+                    Title
+                </div>
+                <div class="card col-4">
+                    Ratings:
+                </div>
+                <div class="card col-4">
+                    Rating out of 10
+                </div>
+            <p class="card">
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elit risus, bibendum in laoreet a,
+                gravida sed dolor. Curabitur placerat gravida justo, sit amet malesuada augue viverra et. Praesent
+                bibendum, eros in porta scelerisque, orci arcu ornare sapien, eu euismod mauris libero eu turpis.
+                Suspendisse ac ultricies odio, in suscipit magna. Mauris non sapien placerat, sagittis libero placerat,
+                tempor libero. Suspendisse eget luctus justo. Sed vulputate justo non velit tempus, quis mattis tellus
+                aliquet."
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elit risus, bibendum in laoreet a,
+                gravida sed dolor. Curabitur placerat gravida justo, sit amet malesuada augue viverra et. Praesent
+                bibendum, eros in porta scelerisque, orci arcu ornare sapien, eu euismod mauris libero eu turpis.
+                Suspendisse ac ultricies odio, in suscipit magna. Mauris non sapien placerat, sagittis libero placerat,
+                tempor libero. Suspendisse eget luctus justo. Sed vulputate justo non velit tempus, quis mattis tellus
+                aliquet."
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elit risus, bibendum in laoreet a,
+                gravida sed dolor. Curabitur placerat gravida justo, sit amet malesuada augue viverra
+               
+            </p>
+        </section>
+        <section class="row">
+            <div class="card col-2">
+                <p>Genre</p>
+                <p>Release date</p>
+                <p>Rated: R</p>
+            </div>
+            <div class="card col-8">
+                <p>where to watch:</p>
+                <ul class = "container">
+                    <li>netflix</li>
+                    <li>netflix</li>
+                    <li>netflix</li>
+            </div>
+            <div class="card col-2">
+                <button class="align-bottom">Watch here!!</button>
+            </div>
+            
+        </section>
+    </main>
 
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+<script src="./assets/script/script.js"></script>
 </html>
-
-
-    Watch List Button: on click go to watchlist.html and get watchlist from localStorage
-    Use API for reviews and movie data to load onto the page
-        Title
-        <container>
-            Reviews Rating
-            Synopsis
-            Motion Picture Association Rating
-    Button:  Add to my watchlist 
-            if watchList.length < 24 append to watchList cards
-            else return modal:  "Your watch list is full!"
