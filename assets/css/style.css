@@ -1,7 +1,12 @@
 
 body{
+    background-size: cover;
+    background-image: url(../Images/felix-mooneeram-evlkOfkQ5rE-unsplash.jpg);
 
-    background: #9ea2a7;
+}
+
+.home{
+    position: relative;
 }
 
 .height{
