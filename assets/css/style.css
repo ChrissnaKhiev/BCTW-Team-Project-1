@@ -1,3 +1,4 @@
+
 img {
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -12,6 +13,7 @@ img {
 .bgHome{
     background-size: cover;
     background-image: url(../Images/felix-mooneeram-evlkOfkQ5rE-unsplash.jpg);
+
 }
 
 .home{
@@ -67,6 +69,8 @@ img {
 
     box-shadow: none;
     border:none;
+
+}
 
 .input-group { width: 30%; }
 .input-icon {
