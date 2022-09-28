@@ -15,7 +15,7 @@ const options1 = {
     }
 };
 
-fetch('https://movie-database-alternative.p.rapidapi.com/?s=Avengers%20Endgame&r=json&page=1', options)
+fetch('https://movie-database-alternative.p.rapidapi.com/?r=json&i=tt4154796', options)
 	.then(response => response.json())
 	.then(response => console.log(response))
 	.catch(err => console.error(err));
