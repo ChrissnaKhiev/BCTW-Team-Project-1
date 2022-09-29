@@ -8,7 +8,12 @@ var releasedDate = document.getElementById('released');
 var rated = document.getElementById('rated');
 var rating = document.getElementById('rating');
 var resultsData = document.getElementById('movieResults');
+var addToWatchList = document.querySelector("#addToWatchList");
+
+
+
 var listLocation = document.getElementById('listLocation');
+
 
 
 
@@ -89,7 +94,6 @@ function getResults(data) {
             return `<div class="col"><img src="${Search.Poster}"/><p>${Search.Title}</p></div>`;
     }).join('');
 }
-<<<<<<< HEAD
 function myClick() {
         window.location.replace("results.html")
         
@@ -97,7 +101,7 @@ function myClick() {
 
 homeSearchBtn.addEventListener('click', myClick);
 
-=======
+
 function getLocations(data) {
     console.log(data);
     listLocation.innerHTML = data.map((newData) => {
@@ -106,8 +110,14 @@ function getLocations(data) {
     }).join('');
 }
 
-init();
->>>>>>> 9ca3f59547b454b58bfcd2cb11998ee759d203fc
+
+function addMovie() {
+    console.log("movie title", titleData.textContent);
+    console.log("movie poster", posterData.innerHTML);
+}
+
+addToWatchList.addEventListener("click", addMovie)
+
 
 // RETURN TO INDEX
 var homeBtn = document.getElementsByClassName('logo');
