@@ -12,32 +12,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./Develop//css/style.css">
-    <link rel="stylesheet" href="./Develop/css/homepage.css">
-    <title>Results screen</title>
+    <title>FMM Details</title>
 </head>
 
-<body>
+<body class="bg-secondary">
     <header>
-        <nav class="container navbar navbar-light bg-light justify-content-between">
-            <a class="navbar-brand">Navbar</a>
+        <nav class="container navbar navbar-dark bg-dark justify-content-around">
+            <h2 class="logo">findMyMovie</h2>
             <div class="col-md-6">
-                <div class="form">
-                    <input type="text" class="form-control form-input" placeholder="Search a Movie">
-                    <span class="left-pan" ><i class="material-icons">search</i></span>
+                <div class="form ">
+                    <input type="text" class="form-control form-input bg-secondary" placeholder="Search a Movie">
+                    <span class="left-pan" ><i class="material-icons bg-secondary">search</i></span>
                 </div>
         </nav>
     </header>
-    <main class="container">
+    <main class="container bg-light">
         <section class="row">
-            <div  class="card col-2" id="poster"></div>
+            <div  class="col-2" id="poster"></div>
             <div class="row col">
-                <div class="card col-4" id="title">
-                    Title
-                </div>
-                <div class="card col-4" id="rating">
+                <h2 class="col-4" id="title"></h2>
+                <div class="col-8" id="rating">
                     Ratings:
                 </div>
-            <p class="card" id="plot">
+            <p class="" id="plot">
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elit risus, bibendum in laoreet a,
                 gravida sed dolor. Curabitur placerat gravida justo, sit amet malesuada augue viverra et. Praesent
                 bibendum, eros in porta scelerisque, orci arcu ornare sapien, eu euismod mauris libero eu turpis.
@@ -56,19 +53,18 @@
             </p>
         </section>
         <section class="row">
-            <div class="card col-2">
+            <div class="col-2">
                 <p id="genre">Genre</p>
                 <p id="released">Release date</p>
                 <p id="rated">Rated: R</p>
             </div>
             <div class="card col-8">
-                <p>where to watch:</p>
-                <ul class = "container">
-                    <li>netflix</li>
-                    <li>netflix</li>
-                    <li>netflix</li>
+                <p>Where to Watch:</p>
+                <ul id="listLocation">
+
+                </ul>
             </div>
-            <div class="card col-2">
+            <div class="col-2">
                 <button class="align-bottom">Watch here!!</button>
             </div>
             
