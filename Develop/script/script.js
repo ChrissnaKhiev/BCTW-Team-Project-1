@@ -98,3 +98,9 @@ function getLocations(data) {
 
 init();
 
+// RETURN TO INDEX
+var homeBtn = document.getElementsByClassName('logo');
+homeBtn[0].addEventListener("click", homeBound);
+function homeBound(){
+window.location.replace("./index.html");}
+// 
