@@ -1,5 +1,5 @@
 var wlist;
-var homeSearchBtn = document.getElementById('homeSearchBtn');
+var homeSearchBtn = document.getElementById('searchBtn');
 var posterData = document.getElementById('poster');
 var titleData = document.getElementById('title');
 var plotData = document.getElementById('plot');
@@ -8,6 +8,7 @@ var releasedDate = document.getElementById('released');
 var rated = document.getElementById('rated');
 var rating = document.getElementById('rating');
 var resultsData = document.getElementById('movieResults');
+
 
 
 // const options = {
@@ -93,7 +94,11 @@ function getResults(data) {
             return `<div class="col"><img src="${Search.Poster}"/><p>${Search.Title}</p></div>`;
     }).join('');
 }
+function myClick() {
+        window.location.replace("results.html")
+        
+}
 
-// homeSearchBtn.addEventListener('click', generateSearch());
-init();
+homeSearchBtn.addEventListener('click', myClick);
+
 
