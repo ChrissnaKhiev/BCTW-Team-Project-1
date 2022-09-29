@@ -70,3 +70,8 @@ img {
     border-left: 1px solid #9ea2a7;
 
 }
+
+.logo{
+    color: rgb(255, 185, 127);
+    font-family: 'Ubuntu', sans-serif;
+}
