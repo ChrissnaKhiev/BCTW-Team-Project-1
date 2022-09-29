@@ -8,7 +8,12 @@ var releasedDate = document.getElementById('released');
 var rated = document.getElementById('rated');
 var rating = document.getElementById('rating');
 var resultsData = document.getElementById('movieResults');
+var addToWatchList = document.querySelector("#addToWatchList");
+
+
+
 var listLocation = document.getElementById('listLocation');
+
 
 
 // const options = {
@@ -97,6 +102,13 @@ function getLocations(data) {
 }
 
 init();
+
+function addMovie() {
+    console.log("movie title", titleData.textContent);
+    console.log("movie poster", posterData.innerHTML);
+}
+
+addToWatchList.addEventListener("click", addMovie)
 
 // RETURN TO INDEX
 var homeBtn = document.getElementsByClassName('logo');
