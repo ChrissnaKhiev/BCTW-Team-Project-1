@@ -1,6 +1,12 @@
 var wlist;
 var homeSearchBtn = document.getElementById('homeSearchBtn');
-var title = '';
+var posterData = document.getElementById('poster');
+var titleData = document.getElementById('title');
+var plotData = document.getElementById('plot');
+var genreData = document.getElementById('genre');
+var releasedDate = document.getElementById('released');
+var rated = document.getElementById('rated');
+var rating = document.getElementById('rating');
 
 
 // const options = {
@@ -21,11 +27,20 @@ var title = '';
 function init() {
     fetch('./assets/data.json')
 	.then(response => response.json())
-	.then(response => console.log(response))
+	.then( function (data) {
+        getPoster(data);
+        getPlot(data);
+        getTitle(data);
+        getRating(data);
+        getGenre(data);
+        getDate(data);
+        getRate(data);
+    })
 	.catch(err => console.error(err));
     fetch('./assets/sample.json')
     .then(response => response.json())
-    .then(response => console.log(response))
+    .then(function (data) {
+    })
     .catch(err => console.error(err));
 }
 
@@ -35,7 +50,29 @@ function generateSearch() {
     console.log(title);
     init();
 }
+function getPoster(data) {
+    posterData.innerHTML = `<img src="${data.Poster}">`;
+}
+function getPlot(data) {
+    console.log(data);
+    plotData.textContent = data.Plot;
+}
+function getTitle(data) {
+    titleData.textContent = data.Title;
+}
+function getGenre(data) {
+    genreData.textContent = data.Genre;
+}
+function getDate(data) {
+    releasedDate.textContent = data.Released;
+}
+function getRating(data) {
+    rating.textContent = 'IMDB ' + data.Ratings[0].Value;
+}
+function getRate(data) {
+    rated.textContent = data.Rated;
+}
 
-homeSearchBtn.addEventListener('click', generateSearch());
+// homeSearchBtn.addEventListener('click', generateSearch());
 init();
 
