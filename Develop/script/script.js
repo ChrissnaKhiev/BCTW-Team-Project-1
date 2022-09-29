@@ -12,6 +12,9 @@ var addToWatchList = document.querySelector("#addToWatchList");
 
 
 
+var listLocation = document.getElementById('listLocation');
+
+
 
 // const options = {
 //     method: 'GET',
@@ -53,20 +56,14 @@ function init() {
         getDate(data);
         getRate(data);
     })
-	.catch(err => console.error(err));
+	// .catch(err => console.error(err));
     fetch('./assets/sample.json')
     .then(response => response.json())
     .then(function (data) {
+        getLocations(data);
     })
-    .catch(err => console.error(err));
+    // .catch(err => console.error(err));
 }
-
-// function generateSearch() {
-//     var homeSearch = document.getElementById('homeInput').value;
-//     title = homeSearch;
-//     console.log(title);
-//     init();
-// }
 
 function getPoster(data) {
     posterData.innerHTML = `<img src="${data.Poster}">`;
@@ -96,8 +93,14 @@ function getResults(data) {
             return `<div class="col"><img src="${Search.Poster}"/><p>${Search.Title}</p></div>`;
     }).join('');
 }
+function getLocations(data) {
+    console.log(data);
+    listLocation.innerHTML = data.map((newData) => {
+        console.log(newData.name)
+        return `<li>${newData.name}</li>`;
+    }).join('');
+}
 
-// homeSearchBtn.addEventListener('click', generateSearch());
 init();
 
 function addMovie() {
