@@ -1,5 +1,6 @@
 var wlist;
-var homeSearchBtn = document.getElementById('searchBtn');
+var searchBtn = document.getElementById('searchBtn');
+var searchBar = document.getElementById('searchBar');
 var posterData = document.getElementById('poster');
 var titleData = document.getElementById('title');
 var plotData = document.getElementById('plot');
@@ -134,7 +135,9 @@ function homeBound(){
 window.location.replace("./index.html");}
 // 
 
-function myClick() {
-    window.location.replace("./results.html");
+function grabSearch(searchBar) {
+    console.log(searchBar.textContent)
+    // window.location.replace("./results.html");
 }
-homeSearchBtn.addEventListener('click', myClick);
+
+searchBtn.addEventListener('click', grabSearch);
