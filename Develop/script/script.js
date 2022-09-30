@@ -11,6 +11,7 @@ var resultsData = document.getElementById('movieResults');
 var wListDisplay = document.getElementById('watchListDisplay');
 var addToWatchList = document.querySelector("#addToWatchList");
 var listLocation = document.getElementById('listLocation');
+var watchList = [];
 
 
 
@@ -96,10 +97,6 @@ function getResults(data) {
     }).join('');
 }
 
-function myClick() {
-    window.location.replace("results.html")
-}
-homeSearchBtn.addEventListener('click', myClick);
 
 function getLocations(data) {
     console.log(data);
@@ -112,8 +109,14 @@ function getLocations(data) {
 function addMovie() {
     console.log("movie title", titleData.textContent);
     console.log("movie poster", posterData.innerHTML);
-    localStorage.setItem('movieTitle', titleData.textContent);
-    localStorage.setItem('moviePoster', posterData.innerHTML);
+    var addedMovie = 
+        { title: titleData.textContent,
+          poster: posterData.innerHTML,
+        }
+    console.log("watch", addedMovie);
+    watchList.push(addedMovie);
+    console.log(watchList);
+    localStorage.setItem("myWatchList", JSON.stringify(watchList));
 }
 
 addToWatchList.addEventListener("click", addMovie);
@@ -122,7 +125,6 @@ init();
 
 // RETURN TO INDEX
 var homeBtn = document.getElementsByClassName('logo');
-document.getElementById('b').addEventListener("click", function () { console.log("          __         .' '."); console.log("        _/__)        .   .       ."); console.log("       (8|)_}}- .      .        ."); console.log("        `\\__)    '. . ' ' .  . ' "); });
 homeBtn[0].addEventListener("click", homeBound);
 
 function homeBound(){
