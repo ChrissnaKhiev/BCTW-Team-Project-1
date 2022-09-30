@@ -96,11 +96,6 @@ function getResults(data) {
     }).join('');
 }
 
-function myClick() {
-    window.location.replace("results.html")
-}
-homeSearchBtn.addEventListener('click', myClick);
-
 function getLocations(data) {
     console.log(data);
     listLocation.innerHTML = data.map((newData) => {
@@ -115,21 +110,20 @@ function addMovie() {
     localStorage.setItem('movieTitle', titleData.textContent);
     localStorage.setItem('moviePoster', posterData.innerHTML);
 }
-
+if (wListPage){
 addToWatchList.addEventListener("click", addMovie);
+}
 
 init();
 
 // RETURN TO INDEX
 var homeBtn = document.getElementsByClassName('logo');
-document.getElementById('b').addEventListener("click", function () { console.log("          __         .' '."); console.log("        _/__)        .   .       ."); console.log("       (8|)_}}- .      .        ."); console.log("        `\\__)    '. . ' ' .  . ' "); });
 homeBtn[0].addEventListener("click", homeBound);
-
 function homeBound(){
 window.location.replace("./index.html");}
 // 
-
 function myClick() {
     window.location.replace("./results.html");
 }
-homeSearchBtn.addEventListener('click', myClick);
+
+// homeSearchBtn.addEventListener('click', myClick);
