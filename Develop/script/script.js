@@ -119,7 +119,10 @@ function addMovie() {
     localStorage.setItem("myWatchList", JSON.stringify(watchList));
 }
 
-addToWatchList.addEventListener("click", addMovie);
+
+if (wListPage){
+    addToWatchList.addEventListener("click", addMovie);
+    }
 
 init();
 
