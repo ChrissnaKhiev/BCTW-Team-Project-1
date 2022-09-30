@@ -71,6 +71,20 @@ img {
 }
 
 .logo{
-    color: rgb(255, 185, 127);
+    color: #E5DCC5;
     font-family: 'Ubuntu', sans-serif;
 }
+
+.bg-alert{
+    background-color: #C14953;
+}
+
+.bg-chill{
+    background-color: #848FA5;
+}
+
+.bCard{
+    border: #848FA5, solid, 2px;
+    box-shadow: 1px 1px 1px #848FA5;
+}
+
