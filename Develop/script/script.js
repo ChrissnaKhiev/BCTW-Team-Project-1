@@ -135,8 +135,9 @@ function homeBound(){
 window.location.replace("./index.html");}
 // 
 
-function grabSearch(searchBar) {
-    console.log(searchBar.textContent)
+function grabSearch() {
+    var resp = searchBar.value;
+    console.log(resp);
     // window.location.replace("./results.html");
 }
 
