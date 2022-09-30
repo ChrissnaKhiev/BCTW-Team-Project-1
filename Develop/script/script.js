@@ -114,6 +114,7 @@ function addMovie() {
     console.log("movie poster", posterData.innerHTML);
     localStorage.setItem('movieTitle', titleData.textContent);
     localStorage.setItem('moviePoster', posterData.innerHTML);
+    Hi Chriss
 }
 
 addToWatchList.addEventListener("click", addMovie);
