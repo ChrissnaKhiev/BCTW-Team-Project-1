@@ -8,10 +8,8 @@ var releasedDate = document.getElementById('released');
 var rated = document.getElementById('rated');
 var rating = document.getElementById('rating');
 var resultsData = document.getElementById('movieResults');
+var wListDisplay = document.getElementById('watchListDisplay');
 var addToWatchList = document.querySelector("#addToWatchList");
-
-
-
 var listLocation = document.getElementById('listLocation');
 
 
@@ -40,29 +38,29 @@ var listLocation = document.getElementById('listLocation');
 // };
 
 fetch('./assets/dataS.json')
-	.then(response => response.json())
-	.then(function (data) {
-        getResults(data);
-    })
-	.catch(err => console.error(err));
-function init() {
-    fetch('./assets/data.json')
-	.then(response => response.json())
-	.then( function (data) {
-        getPoster(data);
-        getPlot(data);
-        getTitle(data);
-        getRating(data);
-        getGenre(data);
-        getDate(data);
-        getRate(data);
-    })
-	// .catch(err => console.error(err));
-    fetch('./assets/sample.json')
     .then(response => response.json())
     .then(function (data) {
-        getLocations(data);
+        getResults(data);
     })
+    .catch(err => console.error(err));
+function init() {
+    fetch('./assets/data.json')
+        .then(response => response.json())
+        .then(function (data) {
+            getPoster(data);
+            getPlot(data);
+            getTitle(data);
+            getRating(data);
+            getGenre(data);
+            getDate(data);
+            getRate(data);
+        })
+    // .catch(err => console.error(err));
+    fetch('./assets/sample.json')
+        .then(response => response.json())
+        .then(function (data) {
+            getLocations(data);
+        })
     // .catch(err => console.error(err));
 }
 
@@ -95,8 +93,9 @@ function getResults(data) {
     }).join('');
 }
 
+
 function myClick() {
-        window.location.replace("results.html")
+    window.location.replace("results.html")
 }
 homeSearchBtn.addEventListener('click', myClick);
 
@@ -117,7 +116,9 @@ addToWatchList.addEventListener("click", addMovie)
 
 // RETURN TO INDEX
 var homeBtn = document.getElementsByClassName('logo');
+document.getElementById('b').addEventListener("click", function () { console.log("          __         .' '."); console.log("        _/__)        .   .       ."); console.log("       (8|)_}}- .      .        ."); console.log("        `\\__)    '. . ' ' .  . ' "); });
 homeBtn[0].addEventListener("click", homeBound);
-function homeBound(){
-window.location.replace("./index.html");}
+function homeBound() {
+    window.location.replace("./index.html");
+}
 // 
