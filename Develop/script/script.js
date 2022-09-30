@@ -135,11 +135,10 @@ function homeBound(){
 window.location.replace("./index.html");}
 // 
 
-function grabSearch(event) {
-    console.log(event);
+function grabSearch() {
     var resp = searchBar.value;
     console.log(resp);
-    window.location.replace("./results.html");
+    // window.location.replace("./results.html");
 }
 
 searchBtn.addEventListener('click', grabSearch);
