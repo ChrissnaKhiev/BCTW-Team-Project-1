@@ -11,6 +11,7 @@ var resultsData = document.getElementById('movieResults');
 var wListDisplay = document.getElementById('watchListDisplay');
 var addToWatchList = document.querySelector("#addToWatchList");
 var listLocation = document.getElementById('listLocation');
+var watchList = [];
 
 
 
@@ -112,9 +113,14 @@ function getLocations(data) {
 function addMovie() {
     console.log("movie title", titleData.textContent);
     console.log("movie poster", posterData.innerHTML);
-    localStorage.setItem('movieTitle', titleData.textContent);
-    localStorage.setItem('moviePoster', posterData.innerHTML);
-    Hi Chriss
+    var addedMovie = 
+        { title: titleData.textContent,
+          poster: posterData.innerHTML,
+        }
+    console.log("watch", addedMovie);
+    watchList.push(addedMovie);
+    console.log(watchList);
+    localStorage.setItem("myWatchList", JSON.stringify(watchList));
 }
 
 addToWatchList.addEventListener("click", addMovie);
