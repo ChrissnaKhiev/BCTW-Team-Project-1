@@ -42,20 +42,23 @@ fetch('./assets/dataS.json')
     .then(function (data) {
         getResults(data);
     })
-    .catch(err => console.error(err));
+
+	// .catch(err => console.error(err));
 function init() {
     fetch('./assets/data.json')
-        .then(response => response.json())
-        .then(function (data) {
-            getPoster(data);
-            getPlot(data);
-            getTitle(data);
-            getRating(data);
-            getGenre(data);
-            getDate(data);
-            getRate(data);
-        })
-    // .catch(err => console.error(err));
+	.then(response => response.json())
+	.then(function (data) {
+        console.log(data);
+        getPoster(data);
+        getPlot(data);
+        getTitle(data);
+        getRating(data);
+        getGenre(data);
+        getDate(data);
+        getRate(data);
+    })
+	// .catch(err => console.error(err));
+
     fetch('./assets/sample.json')
         .then(response => response.json())
         .then(function (data) {
@@ -93,7 +96,6 @@ function getResults(data) {
     }).join('');
 }
 
-
 function myClick() {
     window.location.replace("results.html")
 }
@@ -110,15 +112,24 @@ function getLocations(data) {
 function addMovie() {
     console.log("movie title", titleData.textContent);
     console.log("movie poster", posterData.innerHTML);
+    localStorage.setItem('movieTitle', titleData.textContent);
+    localStorage.setItem('moviePoster', posterData.innerHTML);
 }
 
-addToWatchList.addEventListener("click", addMovie)
+addToWatchList.addEventListener("click", addMovie);
+
+init();
 
 // RETURN TO INDEX
 var homeBtn = document.getElementsByClassName('logo');
 document.getElementById('b').addEventListener("click", function () { console.log("          __         .' '."); console.log("        _/__)        .   .       ."); console.log("       (8|)_}}- .      .        ."); console.log("        `\\__)    '. . ' ' .  . ' "); });
 homeBtn[0].addEventListener("click", homeBound);
-function homeBound() {
-    window.location.replace("./index.html");
-}
+
+function homeBound(){
+window.location.replace("./index.html");}
 // 
+
+function myClick() {
+    window.location.replace("./results.html");
+}
+homeSearchBtn.addEventListener('click', myClick);
