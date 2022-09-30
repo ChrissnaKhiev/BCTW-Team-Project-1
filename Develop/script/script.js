@@ -1,5 +1,5 @@
 var wlist;
-var homeSearchBtn = document.getElementById('searchBtn');
+var homeSearchBtn = document.getElementById('homeSearchBtn');
 var posterData = document.getElementById('poster');
 var titleData = document.getElementById('title');
 var plotData = document.getElementById('plot');
@@ -13,7 +13,6 @@ var addToWatchList = document.querySelector("#addToWatchList");
 
 
 var listLocation = document.getElementById('listLocation');
-
 
 
 
@@ -94,12 +93,6 @@ function getResults(data) {
             return `<div class="col"><img src="${Search.Poster}"/><p>${Search.Title}</p></div>`;
     }).join('');
 }
-
-function myClick() {
-        window.location.replace("results.html")
-}
-homeSearchBtn.addEventListener('click', myClick);
-
 function getLocations(data) {
     console.log(data);
     listLocation.innerHTML = data.map((newData) => {
@@ -107,6 +100,8 @@ function getLocations(data) {
         return `<li>${newData.name}</li>`;
     }).join('');
 }
+
+init();
 
 function addMovie() {
     console.log("movie title", titleData.textContent);
