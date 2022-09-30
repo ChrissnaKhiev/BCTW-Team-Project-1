@@ -44,11 +44,12 @@ fetch('./assets/dataS.json')
 	.then(function (data) {
         getResults(data);
     })
-	.catch(err => console.error(err));
+	// .catch(err => console.error(err));
 function init() {
     fetch('./assets/data.json')
 	.then(response => response.json())
-	.then( function (data) {
+	.then(function (data) {
+        console.log(data);
         getPoster(data);
         getPlot(data);
         getTitle(data);
@@ -94,14 +95,6 @@ function getResults(data) {
             return `<div class="col"><img src="${Search.Poster}"/><p>${Search.Title}</p></div>`;
     }).join('');
 }
-function myClick() {
-        window.location.replace("results.html")
-        
-}
-
-homeSearchBtn.addEventListener('click', myClick);
-
-
 function getLocations(data) {
     console.log(data);
     listLocation.innerHTML = data.map((newData) => {
@@ -110,14 +103,14 @@ function getLocations(data) {
     }).join('');
 }
 
-
 function addMovie() {
     console.log("movie title", titleData.textContent);
     console.log("movie poster", posterData.innerHTML);
 }
 
-addToWatchList.addEventListener("click", addMovie)
+addToWatchList.addEventListener("click", addMovie);
 
+init();
 
 // RETURN TO INDEX
 var homeBtn = document.getElementsByClassName('logo');
@@ -125,3 +118,8 @@ homeBtn[0].addEventListener("click", homeBound);
 function homeBound(){
 window.location.replace("./index.html");}
 // 
+
+function myClick() {
+    window.location.replace("./results.html");
+}
+homeSearchBtn.addEventListener('click', myClick);
