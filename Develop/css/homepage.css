@@ -1,18 +1,19 @@
-.bgHome{
+/* Sets the background image for our homepage */
+.bgHome {
     background-size: cover;
     background-image: url(/assets/Images/felix-mooneeram-evlkOfkQ5rE-unsplash.jpg);
 }
 
-.home{
+.home {
     position: relative;
 }
-
-.height{
+/* tells the page where to place the logo/searchbar */
+.height {
 
     height: 90vh;
 }
-
-h1{
+/* sets the styling for our logo */
+h1 {
     color: #E5DCC5;
     text-align: center;
     font-size: 600%;

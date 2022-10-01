@@ -22,13 +22,11 @@ var resultsData = document.getElementById('movieResults');
 var wListDisplay = document.getElementById('watchListDisplay');
 // Our Watch List button(s)
 var addToWatchList = document.querySelector("#addToWatchList");
+var homeBtn = document.getElementsByClassName('logo');
 var listLocation = document.getElementById('listLocation');
 var watchList = [];
 var navWatchList = document.getElementById("navWatchList");
 var searchItem = '';
-
-
-
 
 // const options = {
 //     method: 'GET',
@@ -55,7 +53,7 @@ var searchItem = '';
 // Fetch call gets our json from our API
 
 
-    // Adds the data we need from the json that we'll later save and then add to page
+// Adds the data we need from the json that we'll later save and then add to page
 function goMovie(movieIMDB) {
     const options = {
         method: 'GET',
@@ -76,7 +74,7 @@ function goMovie(movieIMDB) {
             getGenre(data);
             getDate(data);
             getRate(data);
-    })
+        })
 
     // const options2 = {
     //     method: 'GET',
@@ -86,9 +84,9 @@ function goMovie(movieIMDB) {
     //         'X-RapidAPI-Host': 'watchmode.p.rapidapi.com'
     //     }
     // };
-    
+
     // //ONLINE STREAM RESULTS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    
+
     // fetch('https://watchmode.p.rapidapi.com/tt3173903/sources/', options2)
     //     .then(response => response.json())
     //     .then(function (data) {
@@ -96,29 +94,37 @@ function goMovie(movieIMDB) {
     //         getLocations(data);
     //     })
 }
+
 // These functions actually propigate the page with all that data
 function getPoster(data) {
     posterData.innerHTML = `<img src="${data.Poster}">`;
 }
+
 function getPlot(data) {
     console.log(data);
     plotData.textContent = data.Plot;
 }
+
 function getTitle(data) {
     titleData.textContent = data.Title;
 }
+
 function getGenre(data) {
     genreData.textContent = data.Genre;
 }
+
 function getDate(data) {
     releasedDate.textContent = data.Released;
 }
+
 function getRating(data) {
     rating.textContent = 'IMDB ' + data.Ratings[0].Value;
 }
+
 function getRate(data) {
     rated.textContent = data.Rated;
 }
+
 function getResults(data) {
     resultsData.innerHTML = data.Search.map((Search, index) => {
         if (index < 13)
@@ -137,29 +143,32 @@ function getLocations(data) {
 function addMovie() {
     console.log("movie title", titleData.textContent);
     console.log("movie poster", posterData.innerHTML);
-    var addedMovie = 
-        { title: titleData.textContent,
-          poster: posterData.innerHTML,
-        }
+    var addedMovie =
+    {
+        title: titleData.textContent,
+        poster: posterData.innerHTML,
+    }
     console.log("watch", addedMovie);
     watchList.push(addedMovie);
     console.log(watchList);
     localStorage.setItem("myWatchList", JSON.stringify(watchList));
 }
-
-
-if (wListPage){
+// checks to see if the wishlist is on the page
+if (wListPage) {
     addToWatchList.addEventListener("click", addMovie);
-    }
+}
 
 // RETURN TO INDEX
-var homeBtn = document.getElementsByClassName('logo');
+// listens for user's click on the "logo"
 homeBtn[0].addEventListener("click", homeBound);
 // this function sends the user back to index when the logo is clicked
-function homeBound(){
-window.location.replace("./index.html");}
+function homeBound() {
+    window.location.replace("./index.html");
+}
 
-// grabs the user's search and sends them to the results page
+// listens for when the searc button is clicked
+searchBtn.addEventListener('click', grabSearch);
+// this function then grabs the user's search and sends them to the results page
 function grabSearch() {
     searchItem = searchBar.value;
     const options3 = {
@@ -175,7 +184,7 @@ function grabSearch() {
         .then(function (data) {
             console.log(data);
             setSearch(data);
-})
+        })
     function setSearch(data) {
         console.log(data);
         localStorage.setItem('search', JSON.stringify(data));
@@ -187,17 +196,13 @@ function goResults() {
     // window.location.replace("./results.html");
     // localStorage.getItem(JSON.parse('search'));
 
-//ONLINE STREAM RESULTS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //ONLINE STREAM RESULTS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-// var watchKey = 'Bo7G38cBwFygy0ksBIGcQOv4HaIc9OSz0xc7DBU2';
-// fetch(`https://api.watchmode.com/v1/title/345534/sources/?apiKey=${watchKey}`)
-//     .then(response => response.json())
-//     .then(function (data) {
-//         console.log(data);
-//         getLocations(data);
-//     })
+    // var watchKey = 'Bo7G38cBwFygy0ksBIGcQOv4HaIc9OSz0xc7DBU2';
+    // fetch(`https://api.watchmode.com/v1/title/345534/sources/?apiKey=${watchKey}`)
+    //     .then(response => response.json())
+    //     .then(function (data) {
+    //         console.log(data);
+    //         getLocations(data);
+    //     })
 }
-
-searchBtn.addEventListener('click', grabSearch);
-
-
