@@ -23,13 +23,15 @@ Through the course of this project, we helped strengthen our skills in these are
 
 ## User Story 
 
+```
 AS A client who is looking for online movies to watch
 I WANT to search for movies with information on where to watch online
 SO THAT I can save these movies to a list to watch later
-
+```
 
 ## Acceptance Criteria
 
+```
 GIVEN I am using a search element to type the title of a movie
 WHEN I click the search button
 THEN I am presented with movies that match my search 
@@ -41,7 +43,7 @@ WHEN I click a movie in my Watch List
 THEN I go back to the detailed information about that movie
 WHEN I refresh the page
 THEN the saved events persist
-
+```
 
 ## Mock-Up
 
