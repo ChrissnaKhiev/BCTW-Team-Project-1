@@ -24,6 +24,7 @@ var wListDisplay = document.getElementById('watchListDisplay');
 var addToWatchList = document.querySelector("#addToWatchList");
 var listLocation = document.getElementById('listLocation');
 var watchList = [];
+var navWatchList = document.getElementById("navWatchList");
 
 
 
@@ -155,3 +156,5 @@ function grabSearch() {
 }
 // 
 searchBtn.addEventListener('click', grabSearch);
+
+
