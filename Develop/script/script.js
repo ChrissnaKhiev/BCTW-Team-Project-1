@@ -1,3 +1,4 @@
+console.log('script.js');
 // The searchBtn ID from our HTML
 var searchBtn = document.getElementById('searchBtn');
 // The searchBar ID from our HTML
@@ -16,8 +17,7 @@ var releasedDate = document.getElementById('released');
 var rated = document.getElementById('rated');
 // The rating ID, used to tell our HTML where to put this data  (the rating out of 10)
 var rating = document.getElementById('rating');
-// The resultsData ID from our HTML, all of that data stored above on the webpage itself we will populate to the page
-var resultsData = document.getElementById('movieResults');
+
 // The wListDisplayID from our HTML, all of that data stored above on the webpage itself we will populate to the page
 var wListDisplay = document.getElementById('watchListDisplay');
 // Our Watch List button(s)
@@ -53,8 +53,8 @@ var searchItem = '';
 // Fetch call gets our json from our API
 
 
-// Adds the data we need from the json that we'll later save and then add to page
-function goMovie(movieIMDB) {
+    // Adds the data we need from the json that we'll later save and then add to page
+async function goMovie(movieIMDB) {
     const options = {
         method: 'GET',
         headers: {
@@ -63,7 +63,7 @@ function goMovie(movieIMDB) {
         }
     };
     //GETS THE DATA FOR MOVIES.HTML<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    fetch(`https://movie-database-alternative.p.rapidapi.com/?r=json&i=${movieIMDB}`, options)
+    await fetch(`https://movie-database-alternative.p.rapidapi.com/?r=json&i=${movieIMDB}`, options)
         .then(response => response.json())
         .then(function (data) {
             console.log(data);
@@ -74,25 +74,14 @@ function goMovie(movieIMDB) {
             getGenre(data);
             getDate(data);
             getRate(data);
+    })
+    var watchKey = 'Bo7G38cBwFygy0ksBIGcQOv4HaIc9OSz0xc7DBU2';
+    await fetch(`https://api.watchmode.com/v1/title/345534/sources/?apiKey=${watchKey}`)
+        .then(response => response.json())
+        .then(function (data) {
+            console.log(data);
+            getLocations(data);
         })
-
-    // const options2 = {
-    //     method: 'GET',
-    //     headers: {
-    //         regions: 'US',
-    //         'X-RapidAPI-Key': 'c18896a98bmsh610984fcc99004cp12ec6fjsn97bba59fcfeb',
-    //         'X-RapidAPI-Host': 'watchmode.p.rapidapi.com'
-    //     }
-    // };
-
-    // //ONLINE STREAM RESULTS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-    // fetch('https://watchmode.p.rapidapi.com/tt3173903/sources/', options2)
-    //     .then(response => response.json())
-    //     .then(function (data) {
-    //         console.log(data);
-    //         getLocations(data);
-    //     })
 }
 
 // These functions actually propigate the page with all that data
@@ -125,13 +114,6 @@ function getRate(data) {
     rated.textContent = data.Rated;
 }
 
-function getResults(data) {
-    resultsData.innerHTML = data.Search.map((Search, index) => {
-        if (index < 13)
-            return `<div class="col" onclick='logIMDB(${Search.imdbID})'><img src="${Search.Poster}"/><p>${Search.Title}</p></div>`;
-    }).join('');
-}
-
 function getLocations(data) {
     console.log(data);
     listLocation.innerHTML = data.map((newData) => {
@@ -143,11 +125,10 @@ function getLocations(data) {
 function addMovie() {
     console.log("movie title", titleData.textContent);
     console.log("movie poster", posterData.innerHTML);
-    var addedMovie =
-    {
-        title: titleData.textContent,
-        poster: posterData.innerHTML,
-    }
+    var addedMovie = 
+        { title: titleData.textContent,
+          poster: posterData.innerHTML,
+        }
     console.log("watch", addedMovie);
     watchList.push(addedMovie);
     console.log(watchList);
@@ -166,10 +147,8 @@ function homeBound() {
     window.location.replace("./index.html");
 }
 
-// listens for when the searc button is clicked
-searchBtn.addEventListener('click', grabSearch);
-// this function then grabs the user's search and sends them to the results page
-function grabSearch() {
+// grabs the user's search and sends them to the results page
+async function grabSearch() {
     searchItem = searchBar.value;
     const options3 = {
         method: 'GET',
@@ -179,30 +158,40 @@ function grabSearch() {
         }
     };
     //SEARCH RESULTS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    fetch(`https://movie-database-alternative.p.rapidapi.com/?s=${searchItem}&r=json&page=1`, options3)
+    await fetch(`https://movie-database-alternative.p.rapidapi.com/?s=${searchItem}&r=json&page=1`, options3)
         .then(response => response.json())
         .then(function (data) {
             console.log(data);
-            setSearch(data);
-        })
-    function setSearch(data) {
-        console.log(data);
-        localStorage.setItem('search', JSON.stringify(data));
+            localStorage.setItem('search', JSON.stringify(data)); //save to access on page change below
+            window.location.assign("./results.html");
+})
+}
+function checkData() { //on creation checks
+    console.log('checkData');
+    var data = localStorage.getItem('search');
+    var parsed = JSON.parse(data);
+    console.log('here is the data' + parsed);
+    if (parsed !== null) {
+        goResults(parsed);
     }
-    goResults();
+}
+function goResults(data) {
+    try{
+    getResults(data);
+    }catch(error){
+        console.log('wrong page' + error)
+    }
 }
 
-function goResults() {
-    // window.location.replace("./results.html");
-    // localStorage.getItem(JSON.parse('search'));
-
-    //ONLINE STREAM RESULTS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-    // var watchKey = 'Bo7G38cBwFygy0ksBIGcQOv4HaIc9OSz0xc7DBU2';
-    // fetch(`https://api.watchmode.com/v1/title/345534/sources/?apiKey=${watchKey}`)
-    //     .then(response => response.json())
-    //     .then(function (data) {
-    //         console.log(data);
-    //         getLocations(data);
-    //     })
+function getResults(data) {
+    // The resultsData ID from our HTML, all of that data stored above on the webpage itself we will populate to the page
+    var resultsData = document.getElementById('movieResults');
+    console.log(resultsData);
+    resultsData.innerHTML = data.Search.map((Search, index) => {
+        if (index < 13)
+            return `<div class="col" onclick='logIMDB(${Search.imdbID})'><img src="${Search.Poster}"/><p>${Search.Title}</p></div>`;
+    }).join('');
+    localStorage.setItem('search', '');
 }
+checkData();
+searchBtn.addEventListener('click', grabSearch);
