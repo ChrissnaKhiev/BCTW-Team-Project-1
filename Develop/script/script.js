@@ -22,11 +22,11 @@ var rating = document.getElementById('rating');
 var wListDisplay = document.getElementById('watchListDisplay');
 // Our Watch List button(s)
 var addToWatchList = document.querySelector("#addToWatchList");
+var homeBtn = document.getElementsByClassName('logo');
 var listLocation = document.getElementById('listLocation');
 var watchList = [];
+var navWatchList = document.getElementById("navWatchList");
 var searchItem = '';
-
-
 
 // const options = {
 //     method: 'GET',
@@ -83,26 +83,33 @@ async function goMovie(movieIMDB) {
             getLocations(data);
         })
 }
+
 // These functions actually propigate the page with all that data
 function getPoster(data) {
     posterData.innerHTML = `<img src="${data.Poster}">`;
 }
+
 function getPlot(data) {
     console.log(data);
     plotData.textContent = data.Plot;
 }
+
 function getTitle(data) {
     titleData.textContent = data.Title;
 }
+
 function getGenre(data) {
     genreData.textContent = data.Genre;
 }
+
 function getDate(data) {
     releasedDate.textContent = data.Released;
 }
+
 function getRating(data) {
     rating.textContent = 'IMDB ' + data.Ratings[0].Value;
 }
+
 function getRate(data) {
     rated.textContent = data.Rated;
 }
@@ -127,18 +134,18 @@ function addMovie() {
     console.log(watchList);
     localStorage.setItem("myWatchList", JSON.stringify(watchList));
 }
-
-
-if (wListPage){
+// checks to see if the wishlist is on the page
+if (wListPage) {
     addToWatchList.addEventListener("click", addMovie);
-    }
+}
 
 // RETURN TO INDEX
-var homeBtn = document.getElementsByClassName('logo');
+// listens for user's click on the "logo"
 homeBtn[0].addEventListener("click", homeBound);
 // this function sends the user back to index when the logo is clicked
-function homeBound(){
-window.location.replace("./index.html");}
+function homeBound() {
+    window.location.replace("./index.html");
+}
 
 // grabs the user's search and sends them to the results page
 async function grabSearch() {
