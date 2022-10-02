@@ -158,6 +158,7 @@ if(watchListPage) { //DO NOT CHANGE
         console.log(movie.movie)
         const divContainer = document.createElement("div");
         divContainer.setAttribute("class", "col")
+        const divContainer2 = document.createElement("div");
         const imgNode = document.createElement("img");
         imgNode.setAttribute("src", `${movie.movie.poster}`);
         const pNode = document.createElement("p");
@@ -165,9 +166,9 @@ if(watchListPage) { //DO NOT CHANGE
         const removeBtn = document.createElement('button');
         removeBtn.innerHTML = 'Remove';
 
-    
-        divContainer.appendChild(imgNode);
-        divContainer.appendChild(pNode);
+        divContainer.appendChild(divContainer2);
+        divContainer2.appendChild(imgNode);
+        divContainer2.appendChild(pNode);
         divContainer.appendChild(removeBtn);
         
         removeBtn.addEventListener('click', e => {
@@ -175,7 +176,7 @@ if(watchListPage) { //DO NOT CHANGE
             localStorage.setItem("myWatchList", JSON.stringify(watchList)); //updates the localstorage
             window.location.reload(); //reloads watchlist page to repopulate with new list
         })
-        divContainer.addEventListener("click", e => setMovieId(`${movie.movie.imdbID}`));
+        divContainer2.addEventListener("click", e => setMovieId(`${movie.movie.imdbID}`));
         watchListContainer.appendChild(divContainer);
     })
 }
