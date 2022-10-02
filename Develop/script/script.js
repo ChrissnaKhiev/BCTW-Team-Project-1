@@ -61,7 +61,7 @@ function goMovie(data) {
                 console.log('wrong page' + error);
             }
     }).catch(error => console.log(error));
-    var watchKey = 'Bo7G38cBwFygy0ksBIGcQOv4HaIc9OSz0xc7DBU2';
+    var watchKey = '7spr3g3E9NKJgcnCdBmqpALWM8Iw9FGtIq5jp0mf';
     fetch(`https://api.watchmode.com/v1/title/${movieIMDB}/sources/?apiKey=${watchKey}`)
         .then(response => response.json())
         .then(function (data) {
