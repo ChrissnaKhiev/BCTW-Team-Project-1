@@ -28,6 +28,7 @@ var navWatchList = document.getElementById("navWatchList");
 var searchItem = '';
 var movieBtn = document.getElementById('movieBtn');
 
+
 // Fetch call gets our json from our API
 
 
@@ -55,6 +56,7 @@ function goMovie(data) {
                 getGenre(data);
                 getDate(data);
                 getRate(data);
+                saveID(data);
             }catch(error){
                 console.log('wrong page' + error);
             }
@@ -71,7 +73,9 @@ function goMovie(data) {
             }
         }).catch(error => console.log(error));
 }
-
+function saveID(data) {
+    movieID = data.imdbID;
+}
 // These functions actually propigate the page with all that data
 function getPoster(data) {
     posterData.innerHTML = `<img src="${data.Poster}">`;
@@ -121,7 +125,8 @@ function addMovie() {
                 {
                     movie : {
                         title: titleData.textContent,
-                        poster: posterData.firstChild.src
+                        poster: posterData.firstChild.src,
+                        imdbID: movieID
                     }
                 }
             ]
@@ -132,7 +137,8 @@ function addMovie() {
         const movieJson = {
             movie : {
                 title: titleData.textContent,
-                poster: posterData.firstChild.src
+                poster: posterData.firstChild.src,
+                imdbID: movieID
             }
         }
 
@@ -169,6 +175,7 @@ if(watchListPage) { //DO NOT CHANGE
             localStorage.setItem("myWatchList", JSON.stringify(watchList)); //updates the localstorage
             window.location.reload(); //reloads watchlist page to repopulate with new list
         })
+        divContainer.addEventListener("click", e => setMovieId(`${movie.movie.imdbID}`));
         watchListContainer.appendChild(divContainer);
     })
 }
