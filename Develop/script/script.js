@@ -263,7 +263,10 @@ function getResults(data) {
     
         resultsData.appendChild(divContainer);
     });
+    var data = localStorage.getItem('search');
+    if (data == null){
     localStorage.setItem('search', 'null');
+    }
 }
 
 function setMovieId(data) {
