@@ -44,7 +44,7 @@ function goMovie(data) {
         }
     };
     //GETS THE DATA FOR MOVIES.HTML<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    // fetch(`https://movie-database-alternative.p.rapidapi.com/?r=json&i=${movieIMDB}`, options)
+    fetch(`https://movie-database-alternative.p.rapidapi.com/?r=json&i=${movieIMDB}`, options)
         .then(response => response.json())
         .then(function (data) {
             try{
@@ -60,7 +60,7 @@ function goMovie(data) {
             }
     }).catch(error => console.log(error));
     var watchKey = 'Bo7G38cBwFygy0ksBIGcQOv4HaIc9OSz0xc7DBU2';
-    // fetch(`https://api.watchmode.com/v1/title/${movieIMDB}/sources/?apiKey=${watchKey}`)
+    fetch(`https://api.watchmode.com/v1/title/${movieIMDB}/sources/?apiKey=${watchKey}`)
         .then(response => response.json())
         .then(function (data) {
             try{
@@ -145,7 +145,7 @@ if (wListPage) {
     addToWatchList.addEventListener("click", addMovie);
 }
 
-if(watchListPage) {
+if(watchListPage) { //DO NOT CHANGE
     var watchList = JSON.parse(localStorage.getItem("myWatchList"));
     var watchListContainer = document.getElementById("watchListDisplay");
     watchList.movies.forEach((movie, index) => {
@@ -192,7 +192,7 @@ async function grabSearch() {
         }
     };
     //SEARCH RESULTS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    // await fetch(`https://movie-database-alternative.p.rapidapi.com/?s=${searchItem}&r=json&page=1`, options3)
+    await fetch(`https://movie-database-alternative.p.rapidapi.com/?s=${searchItem}&r=json&page=1`, options3)
         .then(response => response.json())
         .then(function (data) {
             console.log(data);
