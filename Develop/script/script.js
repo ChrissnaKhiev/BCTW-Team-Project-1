@@ -24,37 +24,18 @@ var wListDisplay = document.getElementById('watchListDisplay');
 var addToWatchList = document.querySelector("#addToWatchList");
 var homeBtn = document.getElementsByClassName('logo');
 var listLocation = document.getElementById('listLocation');
-var watchList = [];
 var navWatchList = document.getElementById("navWatchList");
 var searchItem = '';
-
-// const options = {
-//     method: 'GET',
-//     headers: {
-//         'X-RapidAPI-Key': '1ca455037bmshf2d2d8bbbabf617p1190ecjsn3dd42c18b7d6',
-//         'X-RapidAPI-Host': 'movie-database-alternative.p.rapidapi.com'
-//     }
-// };
-// const options1 = {
-//     method: 'GET',
-//     headers: {
-//         'X-RapidAPI-Key': '1ca455037bmshf2d2d8bbbabf617p1190ecjsn3dd42c18b7d6',
-//         'X-RapidAPI-Host': 'watchmode.p.rapidapi.com'
-//     }
-// };
-// const options = {
-// 	method: 'GET',
-// 	headers: {
-// 		'X-RapidAPI-Key': '1ca455037bmshf2d2d8bbbabf617p1190ecjsn3dd42c18b7d6',
-// 		'X-RapidAPI-Host': 'movie-database-alternative.p.rapidapi.com'
-// 	}
-// };
+var movieBtn = document.getElementById('movieBtn');
 
 // Fetch call gets our json from our API
 
 
     // Adds the data we need from the json that we'll later save and then add to page
-async function goMovie(movieIMDB) {
+function goMovie(data) {
+    
+    movieIMDB = data;
+    console.log(movieIMDB);
     const options = {
         method: 'GET',
         headers: {
@@ -63,25 +44,32 @@ async function goMovie(movieIMDB) {
         }
     };
     //GETS THE DATA FOR MOVIES.HTML<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    await fetch(`https://movie-database-alternative.p.rapidapi.com/?r=json&i=${movieIMDB}`, options)
+    // fetch(`https://movie-database-alternative.p.rapidapi.com/?r=json&i=${movieIMDB}`, options)
         .then(response => response.json())
         .then(function (data) {
-            console.log(data);
-            getPoster(data);
-            getPlot(data);
-            getTitle(data);
-            getRating(data);
-            getGenre(data);
-            getDate(data);
-            getRate(data);
-    })
+            try{
+                getPoster(data);
+                getPlot(data);
+                getTitle(data);
+                getRating(data);
+                getGenre(data);
+                getDate(data);
+                getRate(data);
+            }catch(error){
+                console.log('wrong page' + error);
+            }
+    }).catch(error => console.log(error));
     var watchKey = 'Bo7G38cBwFygy0ksBIGcQOv4HaIc9OSz0xc7DBU2';
-    await fetch(`https://api.watchmode.com/v1/title/345534/sources/?apiKey=${watchKey}`)
+    // fetch(`https://api.watchmode.com/v1/title/${movieIMDB}/sources/?apiKey=${watchKey}`)
         .then(response => response.json())
         .then(function (data) {
-            console.log(data);
-            getLocations(data);
-        })
+            try{
+                console.log(data);
+                getLocations(data);
+            }catch(error){
+                console.log('wrong page again bozo' + error);
+            }
+        }).catch(error => console.log(error));
 }
 
 // These functions actually propigate the page with all that data
@@ -116,27 +104,73 @@ function getRate(data) {
 
 function getLocations(data) {
     console.log(data);
+    const set = new Set(); //checks array for dupes
     listLocation.innerHTML = data.map((newData) => {
-        console.log(newData.name)
-        return `<li>${newData.name}</li>`;
+        if(!set.has(newData.name)) {
+            set.add(newData.name);
+            return `<li>${newData.name}</li>`; //if the index is new data type return if not pass
+        }
     }).join('');
 }
 
 function addMovie() {
-    console.log("movie title", titleData.textContent);
-    console.log("movie poster", posterData.innerHTML);
-    var addedMovie = 
-        { title: titleData.textContent,
-          poster: posterData.innerHTML,
+    const watchList = localStorage.getItem('myWatchList');
+    if(watchList == null) {
+        var watchListJson = {
+            movies: [
+                {
+                    movie : {
+                        title: titleData.textContent,
+                        poster: posterData.firstChild.src
+                    }
+                }
+            ]
         }
-    console.log("watch", addedMovie);
-    watchList.push(addedMovie);
-    console.log(watchList);
-    localStorage.setItem("myWatchList", JSON.stringify(watchList));
+        localStorage.setItem("myWatchList", JSON.stringify(watchListJson));
+    } else {
+        const parsed = JSON.parse(watchList);
+        const movieJson = {
+            movie : {
+                title: titleData.textContent,
+                poster: posterData.firstChild.src
+            }
+        }
+
+        parsed.movies.push(movieJson)
+        localStorage.setItem("myWatchList", JSON.stringify(parsed));
+    }
 }
 // checks to see if the wishlist is on the page
 if (wListPage) {
     addToWatchList.addEventListener("click", addMovie);
+}
+
+if(watchListPage) {
+    var watchList = JSON.parse(localStorage.getItem("myWatchList"));
+    var watchListContainer = document.getElementById("watchListDisplay");
+    watchList.movies.forEach((movie, index) => {
+        console.log(movie.movie)
+        const divContainer = document.createElement("div");
+        divContainer.setAttribute("class", "col")
+        const imgNode = document.createElement("img");
+        imgNode.setAttribute("src", `${movie.movie.poster}`);
+        const pNode = document.createElement("p");
+        pNode.innerHTML = `${movie.movie.title}`
+        const removeBtn = document.createElement('button');
+        removeBtn.innerHTML = 'Remove';
+
+    
+        divContainer.appendChild(imgNode);
+        divContainer.appendChild(pNode);
+        divContainer.appendChild(removeBtn);
+        
+        removeBtn.addEventListener('click', e => {
+            watchList.movies.splice(index, 1); //on current index removes 1 aka this the desired movie
+            localStorage.setItem("myWatchList", JSON.stringify(watchList)); //updates the localstorage
+            window.location.reload(); //reloads watchlist page to repopulate with new list
+        })
+        watchListContainer.appendChild(divContainer);
+    })
 }
 
 // RETURN TO INDEX
@@ -158,7 +192,7 @@ async function grabSearch() {
         }
     };
     //SEARCH RESULTS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    await fetch(`https://movie-database-alternative.p.rapidapi.com/?s=${searchItem}&r=json&page=1`, options3)
+    // await fetch(`https://movie-database-alternative.p.rapidapi.com/?s=${searchItem}&r=json&page=1`, options3)
         .then(response => response.json())
         .then(function (data) {
             console.log(data);
@@ -166,7 +200,7 @@ async function grabSearch() {
             window.location.assign("./results.html");
 })
 }
-function checkData() { //on creation checks
+function checkData() { //on load checks if there is data and if there is go to the next function
     console.log('checkData');
     var data = localStorage.getItem('search');
     var parsed = JSON.parse(data);
@@ -175,7 +209,25 @@ function checkData() { //on creation checks
         goResults(parsed);
     }
 }
-function goResults(data) {
+function checkData2() { //on load checks if there is data and if there is go to the next function
+    console.log('checkData');
+    var data = localStorage.getItem('movieId');
+    var parsed = JSON.parse(data);
+    console.log('here is the data' + parsed);
+    if (parsed !== null) {
+        goMovie(parsed);
+    }
+}
+// function checkData3() { //on load checks if there is data and if there is go to the next function
+//     console.log('checkData');
+//     var data = localStorage.getItem('myWatchList');
+//     var parsed = JSON.parse(data);
+//     console.log('here is the data' + parsed);
+//     if (parsed !== null) {
+//         goWatchList(parsed);
+//     }
+// }
+function goResults(data) { // this try catch will run the function even if there is an error
     try{
     getResults(data);
     }catch(error){
@@ -187,11 +239,30 @@ function getResults(data) {
     // The resultsData ID from our HTML, all of that data stored above on the webpage itself we will populate to the page
     var resultsData = document.getElementById('movieResults');
     console.log(resultsData);
-    resultsData.innerHTML = data.Search.map((Search, index) => {
-        if (index < 13)
-            return `<div class="col" onclick='logIMDB(${Search.imdbID})'><img src="${Search.Poster}"/><p>${Search.Title}</p></div>`;
-    }).join('');
-    localStorage.setItem('search', '');
+    data.Search.slice(0, 13).forEach((Search) => {
+        const divContainer = document.createElement("div");
+        divContainer.setAttribute("class", "col")
+        const imgNode = document.createElement("img");
+        imgNode.setAttribute("id", "movieBtn");
+        imgNode.setAttribute("src", `${Search.Poster}`);
+        const pNode = document.createElement("p");
+        pNode.innerHTML = `${Search.Title}`
+    
+        divContainer.appendChild(imgNode);
+        divContainer.appendChild(pNode);
+    
+        divContainer.addEventListener("click", e => setMovieId(`${Search.imdbID}`));
+    
+        resultsData.appendChild(divContainer);
+    });
+    localStorage.setItem('search', 'null');
+}
+
+function setMovieId(data) {
+    localStorage.setItem('movieId', JSON.stringify(data));
+    window.location.assign('./movie.html');
 }
 checkData();
+checkData2();
+// checkData3();
 searchBtn.addEventListener('click', grabSearch);
